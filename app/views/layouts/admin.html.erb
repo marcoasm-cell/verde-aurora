@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+  <head>
+    <title>VerdeAurora</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_importmap_tags %>
+
+  </head>
+
+  <body class="bg-gray-200 flex flex-col">
+    <main class="container mx-auto">
+      <nav class="absolute z-50 bg-white text-black shadow-md w-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between h-22">
+            
+            <!-- Logo -->
+            <div class="flex-shrink-0 flex items-center">
+              <a href="/" class="text-xl font-bold">
+                <img class="h-12 w-12 rounded-full" src="<%= image_path('logo.jpg') %>" alt="logo">
+              </a>
+            </div>
+
+            <!-- Links da Navbar -->
+            <div class="hidden md:flex space-x-4 items-center">
+              <a href="/admin/products" class="hover:bg-green-800 hover:text-white hover:opacity-75 transition px-3 py-2 rounded">Produtos</a>
+              <a href="/admin/categories" class="hover:bg-green-800 hover:text-white hover:opacity-75 transition px-3 py-2 rounded">Categorias</a>
+              <a href="/admin/contacts" class="hover:bg-green-800 hover:text-white hover:opacity-75 transition px-3 py-2 rounded">Contacts</a>
+              <a href="/admin/orders" class="hover:bg-green-800 hover:text-white hover:opacity-75 transition px-3 py-2 rounded">Encomendas</a>
+            </div>
+
+            <!-- Botão Mobile -->
+            <div class="flex items-center md:hidden">
+              <button id="menu-btn" class="focus:outline-none">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Menu Mobile (hidden por padrão) -->
+        <div id="mobile-menu" class="md:hidden hidden px-2 pt-2 pb-3 space-y-1 h-screen"  style="background-color: #d7e4da">
+          <a href="/admin/products" class="block hover:bg-green-700 hover:text-white px-3 py-2 rounded">Produtos</a>
+          <a href="/admin/categories" class="block hover:bg-green-700 hover:text-white px-3 py-2 rounded">Sobre</a>
+          <a href="/admin/contacts" class="block hover:bg-green-700 hover:text-white px-3 py-2 rounded">Contactos</a>
+          <a href="/admin/orders" class="block hover:bg-green-700 hover:text-white px-3 py-2 rounded">Encomendas</a>
+        </div>
+      </nav>
+
+      <%= yield %>
+    </main>
+        <% if flash[:success] %>
+      <div id="alert"class="absolute right-12 top-12 z-50 bg-green-100 border border-green-400 text-green-700 pl-3 pr-12 py-3 rounded mb-4 max-w-10xl mx-auto mt-4" role="alert">
+        <strong class="font-bold">Sucesso!</strong>
+        <span class="block sm:inline"><%= flash[:success] %></span>
+        <span id="close" class="absolute top-0 bottom-0 right-0 px-4 py-3">
+          <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <title>Close</title>
+            <path d="M14.348 14.849a1.2 1.2 0 01-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 11-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 111.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 111.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 010 1.698z"/>
+          </svg>
+        </span>
+      </div>
+      <% flash.delete(:success) %>
+    <% end %>
+    <% if flash[:danger] %>
+      <div id="alert" class="absolute right-12 top-12 z-50 bg-red-100 border border-red-400 text-red-700 pl-3 pr-12 py-3 rounded mb-4 max-w-10xl mx-auto mt-4" role="alert">
+        <strong class="font-bold">Erro!</strong>
+        <span class="block sm:inline"><%= flash[:danger] %></span>
+        <span id="close" class="absolute top-0 bottom-0 right-0 px-4 py-3">
+          <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <title>Close</title>
+            <path d="M14.348 14.849a1.2 1.2 0 01-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 11-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 111.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 111.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 010 1.698z"/>
+          </svg>
+        </span>
+      </div>
+      <% flash.delete(:danger)  %>
+    <% end %>
+  </body>
+</html>

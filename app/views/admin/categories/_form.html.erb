@@ -1,0 +1,19 @@
+<div class="mt-28 max-w-xl mx-auto bg-white shadow-lg rounded-lg p-8">
+  <a href="<%= admin_categories_path %>" class="text-blue-500 hover:underline">Voltar</a>
+  <h1 class="mt-5 text-2xl font-bold mb-6 text-gray-800">Categoria</h1>
+
+  <%= form_for [:admin, @category], html: { multipart: true, class: "space-y-6"} do |f| %>
+    <div>
+      <label class="block text-gray-700 font-medium mb-1">Nome da categoria</label>
+      <input type="text" name="name" value="<%= @category.name %>"
+        class="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300"
+        placeholder="Ex: Camiseta básica">
+    </div>
+
+    <!-- Botão -->
+    <button type="submit"
+      class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition">
+      Guardar
+    </button>
+  <% end %>
+</div>

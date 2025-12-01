@@ -1,0 +1,56 @@
+<div class="mt-28 max-w-xl mx-auto bg-white shadow-lg rounded-lg p-8">
+  <a href="<%= admin_contacts_path %>" class="text-blue-500 hover:underline">Voltar</a>
+  <h1 class="mt-5 text-2xl font-bold mb-6 text-gray-800">Contacto</h1>
+
+    <%= form_for [:admin, @contact], html: { multipart: true, class: "space-y-6"} do |f| %>
+    
+    <!-- Nome -->
+    <% if @contact.product.present? %>
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Produto</label>
+        <a href="<%= product_path(@contact.product) %>" target="_blank" class="text-blue-700 font-medium mb-1">
+          <%= @contact.product.name %></a>
+      </div>
+    <% end %>
+
+    <!-- Nome -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-1">Nome do Contacto</label>
+      <input type="text" name="name" value="<%= @contact.name %>"
+        class="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300">
+    </div>
+
+    <!-- Nome -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-1">Email do Contacto</label>
+      <input type="text" name="email" value="<%= @contact.email %>"
+        class="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300">
+    </div>
+
+    <!-- Nome -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-1">Telefone</label>
+      <input type="text" name="phone" value="<%= @contact.phone %>"
+        class="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300"
+        >
+    </div>
+
+
+    <!-- Descrição -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-1">Mensagem</label>
+      <textarea name="message" rows="4"
+        class="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300"
+        placeholder="Detalhes sobre o contacto..."><%= @contact.message %></textarea>
+    </div>
+
+    <!-- Botão -->
+    <button type="submit"
+      class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition">
+      Guardar
+    </button>
+
+  <% end %>
+
+  
+</div>

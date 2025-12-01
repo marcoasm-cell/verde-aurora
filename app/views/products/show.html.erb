@@ -1,0 +1,221 @@
+<div class="h-26" style="background-color: #456454ff">
+</div>
+
+<%
+=begin%>
+ <div class="h-32 bg-linear-to-b from-stone-400 to-white">
+</div> 
+<%
+=end%>
+<div class="mt-12 max-w-7xl mx-auto p-6 space-y-6">
+
+  <!-- Breadcrumb / Category -->
+  <nav class="text-sm text-gray-500">
+    <a href="/" class="hover:underline">Home</a> / 
+    <span class="text-gray-700"><%= @product.name %></span>
+  </nav>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    
+    <!-- IMAGE CAROUSEL -->
+    <div class="relative rounded-lg overflow-hidden">
+      <div id="carousel-1" class="carousel flex transition-transform duration-500">
+        <% @product.images.each do |img| %>
+          <img src="<%= url_for(img) %>"
+              class="w-full h-68 object-cover flex-shrink-0"
+              alt="<%= @product.name %>">
+        <% end %>
+      </div>
+
+      <button data-target="carousel-1"
+              class="carousel-prev hidden absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-1 rounded-full">
+        ‹
+      </button>
+
+      <button data-target="carousel-1"
+              class="carousel-next hidden absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-1 rounded-full">
+        ›
+      </button>
+    </div>
+
+    <!-- PRODUCT INFO -->
+    <div class="space-y-4">
+      <h1 class="text-3xl font-bold text-gray-800"><%= @product.name %></h1>
+      <p class="text-gray-500 text-sm"><%= @product.category.name %></p>
+
+      <p class="text-gray-700"><%= @product.description %></p>
+
+      <div class="mt-4 flex flex-col gap-1">
+        <p class="text-xs text-gray-400">Cores</p> 
+        <% @colors.each do |color| %>
+          <div class="group w-6 h-6 flex justify-center hover:scale-110 transition rounded-full relative" title="<%= color.name %>" style="background-color: <%= color.code %>">
+            <span class="hidden group-hover:flex absolute -bottom-4 text-xs text-gray-400"><%= color.name %></span>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="mt-5 flex flex-col gap-1">
+        <p class="text-xs text-gray-400">Fragrâncias</p> 
+        <% @fragances.each do |fragance| %>
+          <div class="group w-6 h-6 flex justify-center hover:scale-110 transition relative rounded-lg" title="<%= fragance.name %>" style="background-color: <%= fragance.code %>">
+            <span class="hidden group-hover:flex absolute -bottom-4 text-xs text-gray-400"><%= fragance.name %></span>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="mt-5 flex flex-col sm:flex-row gap-3">
+        <!-- Pedir Informação -->
+        <button id="infoBtn"
+          class="flex-1 hover:scale-105 transition  bg-gray-600 hover:bg-gray-700 text-white 
+            font-bold py-3 px-6 rounded-md transition cursor-pointer">
+          Pedir Informação
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RELATED PRODUCTS (optional) -->
+  <% if @related_products.present? %>
+    <div class="mt-12">
+      <h2 class="text-2xl font-bold mb-4">Produtos Relacionados</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <% @related_products.sample(3).each do |product| %>
+          <a href="<%= product_path(product) %>" >
+            <div class="bg-white shadow rounded-lg overflow-hidden hover:scale-105 transition duration-300 ">
+              <img src="<%= url_for(product.images.first) %>" 
+                  class="w-full h-48 object-cover" alt="<%= product.name %>">
+              <div class="p-4">
+                <h3 class="font-semibold"><%= product.name %></h3>
+                
+                <p class="text-gray-600 text-sm mt-1"><%= product.description.truncate_words(5) %></p>
+              </div>
+            </div>
+          </a>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+</div>
+
+<!-- MODAL -->
+<div id="infoModal" class="fixed inset-0 bg-stone-900/75 hidden items-center justify-center z-50">
+  <div class="bg-white rounded-lg max-w-xl w-full p-12 relative">
+    <!-- Fechar modal -->
+    <button id="closeModal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-800 text-xl cursor-pointer">&times;</button>
+
+    <h2 class="text-2xl font-bold mb-4">Pedir Informação</h2>
+
+    <%= form_with url: contacts_path, method: :post, local: true, class: "space-y-4" do |f| %>
+      <div>
+        <%= f.text_field :product_id, class: "hidden", value: @product.id %>
+      </div>
+
+      <div>
+        <%= f.label :name, "Nome *", class: "block font-medium mb-1" %>
+        <%= f.text_field :name, class: "w-full border rounded p-2 border-gray-300", required: true %>
+      </div>
+
+      <div>
+        <%= f.label :email, "Email *", class: "block font-medium mb-1" %>
+        <%= f.email_field :email, class: "w-full border rounded p-2 border-gray-300", required: true, placeholder: "E-mail" %>
+      </div>
+
+      <div>
+        <%= f.label :phone, "Telefone", class: "block font-medium mb-1" %>
+        <%= f.text_field :phone, class: "w-full border rounded p-2 border-gray-300" %>
+      </div>
+      <div>
+        <%= f.label :message, "Mensagem", class: "block font-medium mb-1" %>
+        <%= f.text_area :message, rows: 4, class: "w-full border rounded p-2 border-gray-300", required: true %>
+      </div>
+
+      <%= f.submit "Enviar", class: "bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full cursor-pointer" %>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+
+    document.querySelectorAll(".carousel").forEach((carousel) => {
+      let index = 0;
+      const slides = carousel.children;
+      const total = slides.length;
+
+      const update = () => {
+        console.log(index);
+        carousel.style.transform = `translateX(-${index * 100}%)`;
+      }
+
+      let startX = 0;
+      let currentX = 0;
+      let isDragging = false;
+
+      const startDrag = (x) => {
+        isDragging = true;
+        startX = x;
+        carousel.style.transition = "none";
+      };
+
+      const moveDrag = (x) => {
+        if (!isDragging) return;
+        currentX = x;
+        const deltaX = currentX - startX;
+        carousel.style.transform =
+          `translateX(calc(${-index * 100}% + ${deltaX}px))`;
+      };
+
+      const endDrag = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        const deltaX = currentX - startX;
+
+        // If swipe big enough → change slide
+        if (Math.abs(deltaX) > 50) {
+          if (deltaX < 0) index = (index + 1) % total; // swipe left → next
+          else index = (index - 1 + total) % total;    // swipe right → prev
+        }
+
+        // snap back
+        carousel.style.transition = "transform .4s ease";
+        update();
+      };
+
+      // Touch events
+      carousel.addEventListener("touchstart", (e) => startDrag(e.touches[0].clientX));
+      carousel.addEventListener("touchmove", (e) => moveDrag(e.touches[0].clientX));
+      carousel.addEventListener("touchend", endDrag);
+
+      // Mouse events (optional — swipe with mouse on desktop)
+      carousel.addEventListener("mousedown", (e) => startDrag(e.clientX));
+      carousel.addEventListener("mousemove", (e) => moveDrag(e.clientX));
+      carousel.addEventListener("mouseup", endDrag);
+      carousel.addEventListener("mouseleave", endDrag);
+    });
+
+    const infoBtn = document.getElementById("infoBtn");
+    const infoModal = document.getElementById("infoModal");
+    const closeModal = document.getElementById("closeModal");
+
+    infoBtn.addEventListener("click", () => {
+      infoModal.classList.remove("hidden");
+      infoModal.classList.add("flex");
+    });
+
+    closeModal.addEventListener("click", () => {
+      infoModal.classList.add("hidden");
+      infoModal.classList.remove("flex");
+    });
+
+    // Fechar clicando fora do modal
+    infoModal.addEventListener("click", (e) => {
+      if (e.target === infoModal) {
+        infoModal.classList.add("hidden");
+        infoModal.classList.remove("flex");
+      }
+    });
+  });
+
+</script>
+

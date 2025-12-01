@@ -1,0 +1,133 @@
+<div class="relative w-full max-h-screen mx-auto overflow-hidden">
+  <!-- Slides -->
+  <div id="carousel-00"  class="carousel flex transition-transform duration-500">
+    <img src="<%= image_path('carousel1.jpg') %>" class="w-full flex-shrink-0" />
+    <img src="<%= image_path('carousel1.jpg') %>" class="w-full flex-shrink-0" />
+    <img src="<%= image_path('carousel1.jpg') %>" class="w-full flex-shrink-0" />
+  </div>
+
+  <button id="carousel-00" 
+          class="carousel-prev hidden absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-1 rounded-full">
+    ‹
+  </button>
+
+  <button id="carousel-00"
+          class="carousel-next hidden absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-1 rounded-full">
+    ›
+  </button>
+
+</div>
+
+<div class="max-w-7xl p-4 mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto" id="products">
+
+  <!-- Loop through products -->
+  <% @products.each_with_index do |product, idx| %>
+    <div class="bg-white overflow-hidde hover:scale-105 transition">
+
+      <!-- IMAGE CAROUSEL -->
+      <a href="<%= product_path(product) %>">
+        <div class="relative rounded-lg overflow-hidden">
+          <div id="carousel-<%= idx %>" class="carousel flex transition-transform duration-500">
+            <% product.images.each do |img| %>
+              <img src="<%= url_for(img) %>"
+                  class="w-full h-68 object-cover flex-shrink-0 "
+                  alt="<%= product.name %>">
+            <% end %>
+          </div>
+
+          <button data-target="carousel-<%= idx %>"
+                  class="carousel-prev hidden absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-1 rounded-full">
+            ‹
+          </button>
+
+          <button data-target="carousel-<%= idx %>"
+                  class="carousel-next hidden absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-1 rounded-full">
+            ›
+          </button>
+        </div>
+
+        <div class="p-4">
+          <h2 class="text-xl font-bold text-gray-800"><%= product.name %></h2>
+          <p class="text-gray-600 text-sm mt-1"><%= product.description.truncate_words(5) %></p>
+
+        </div>
+
+      </a>
+    </div>
+  <% end %>
+
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+
+    document.querySelectorAll(".carousel").forEach((carousel) => {
+      let index = 0;
+      const slides = carousel.children;
+      const total = slides.length;
+
+      const update = () =>
+        carousel.style.transform = `translateX(-${index * 100}%)`;
+
+      const prev = carousel.parentElement.querySelector(".carousel-prev");
+      const next = carousel.parentElement.querySelector(".carousel-next");
+
+      prev.addEventListener("click", () => {
+        index = (index - 1 + total) % total;
+        update();
+      });
+
+      next.addEventListener("click", () => {
+        index = (index + 1) % total;
+        update();
+      });
+
+      // --- SWIPE SUPPORT ---
+      let startX = 0;
+      let currentX = 0;
+      let isDragging = false;
+
+      const startDrag = (x) => {
+        isDragging = true;
+        startX = x;
+        carousel.style.transition = "none";
+      };
+
+      const moveDrag = (x) => {
+        if (!isDragging) return;
+        currentX = x;
+        const deltaX = currentX - startX;
+        carousel.style.transform =
+          `translateX(calc(${-index * 100}% + ${deltaX}px))`;
+      };
+
+      const endDrag = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        const deltaX = currentX - startX;
+
+        // If swipe big enough → change slide
+        if (Math.abs(deltaX) > 50) {
+          if (deltaX < 0) index = (index + 1) % total; // swipe left → next
+          else index = (index - 1 + total) % total;    // swipe right → prev
+        }
+
+        // snap back
+        carousel.style.transition = "transform .4s ease";
+        update();
+      };
+
+      // Touch events
+      carousel.addEventListener("touchstart", (e) => startDrag(e.touches[0].clientX));
+      carousel.addEventListener("touchmove", (e) => moveDrag(e.touches[0].clientX));
+      carousel.addEventListener("touchend", endDrag);
+
+      // Mouse events (optional — swipe with mouse on desktop)
+      carousel.addEventListener("mousedown", (e) => startDrag(e.clientX));
+      carousel.addEventListener("mousemove", (e) => moveDrag(e.clientX));
+      carousel.addEventListener("mouseup", endDrag);
+      carousel.addEventListener("mouseleave", endDrag);
+    });
+
+  });
+</script>

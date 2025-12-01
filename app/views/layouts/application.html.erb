@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+  <head>
+    <title>VerdeAurora</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_importmap_tags %>
+
+  </head>
+
+  <body class="bg-white flex flex-col">
+    
+    <main class="">
+      <nav class="absolute z-50 text-black w-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between h-22">
+            
+            <!-- Logo -->
+            <div class="flex-shrink-0 flex items-center">
+              <a href="/" class="text-xl font-bold">
+                <img class="h-12 w-12 rounded-full hover:scale-105 transition" src="<%= image_path('logo.jpg') %>" alt="logo">
+              </a>
+            </div>
+
+            <!-- Links da Navbar -->
+            <div class="hidden md:flex space-x-4 items-center">
+              <a href="#" class="hover:bg-white hover:opacity-50 hover:text-black text-white px-3 py-2 rounded">Home</a>
+              <%
+=begin%>
+ <a href="#" class="hover:bg-white hover:opacity-50 hover:text-black text-white px-3 py-2 rounded">Sobre</a> 
+<%
+=end%>
+              <a href="#products" class="hover:bg-white hover:opacity-50 hover:text-black text-white px-3 py-2 rounded">Produtos</a>
+              <a href="#contacts" class="hover:bg-white hover:opacity-50 hover:text-black text-white px-3 py-2 rounded">Contactos</a>
+            </div>
+
+            <!-- Botão Mobile -->
+            <div class="flex items-center md:hidden z-10">
+              <button id="menu-btn" class="focus:outline-none">
+                <svg class="h-6 w-6" fill="none" stroke="#fff" stroke-width="2"
+                    viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Menu Mobile (hidden por padrão) -->
+        <div id="mobile-menu" class="md:hidden hidden absolute top-0 right-0 w-full px-2 pt-2 pb-3 space-y-1 h-screen pt-12"  style="background-color: #d7e4da">
+          <a href="#" class="block hover:bg-green-700 px-3 py-2 rounded">Produtos</a>
+          <%
+=begin%>
+ <a href="#" class="block hover:bg-green-700 px-3 py-2 rounded">Sobre</a> 
+<%
+=end%>
+          <a href="#" class="block hover:bg-green-700 px-3 py-2 rounded">Contactos</a>
+        </div>
+      </nav>
+
+      <%= yield %>
+
+      <footer class="bg-gray-900 text-gray-300 py-10 mt-12" id="contacts">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+
+          <!-- Empresa -->
+          <div>
+            <h3 class="text-white text-xl font-semibold mb-4">A VerdeAurora</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Somos uma empresa dedicada a fornecer produtos de qualidade,
+              excelente atendimento e soluções eficientes para o seu dia-a-dia.
+            </p>
+          </div>
+
+          <!-- Links -->
+          <div>
+            <h3 class="text-white text-xl font-semibold mb-4">Produtos</h3>
+            <ul class="space-y-2 text-gray-400 text-sm">
+              <li>Velas artesanais</li>
+              <li>Jesmonite</li>
+            </ul>
+          </div>
+
+          <!-- Contactos -->
+          <div>
+            <h3 class="text-white text-xl font-semibold mb-4">Contactos</h3>
+            <ul class="space-y-2 text-sm text-gray-400">
+              <li>VerdeAurora@empresa.com</li>
+            </ul>
+          </div>
+
+          <!-- Redes Sociais -->
+          <div>
+            <h3 class="text-white text-xl font-semibold mb-4">Segue-nos</h3>
+            <div class="flex space-x-4 text-2xl">
+
+
+              <a href="#" class="hover:text-white transition">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.332 3.608 1.308.976.975 1.246 2.242 1.308 3.608.058 1.265.07 1.645.07 4.849s-.012 3.584-.07 4.849c-.062 1.366-.332 2.633-1.308 3.608-.975.976-2.242 1.246-3.608 1.308-1.265.058-1.645.07-4.849.07s-3.584-.012-4.849-.07c-1.366-.062-2.633-.332-3.608-1.308-.976-.975-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.849c.062-1.366.332-2.633 1.308-3.608C4.516 2.495 5.783 2.225 7.149 2.163 8.414 2.105 8.795 2.163 12 2.163zm0-2.163C8.737 0 8.332.013 7.052.072 5.773.131 4.62.39 3.675 1.339 2.729 2.287 2.469 3.44 2.41 4.718 2.351 5.998 2.338 6.403 2.338 12c0 5.598.013 6.003.072 7.282.059 1.279.319 2.431 1.267 3.379.946.949 2.099 1.208 3.379 1.267C8.332 23.987 8.737 24 12 24s3.668-.013 4.948-.072c1.279-.059 2.431-.319 3.379-1.267.949-.946 1.208-2.099 1.267-3.379.059-1.279.072-1.684.072-7.282 0-5.597-.013-6.002-.072-7.282-.059-1.278-.319-2.431-1.267-3.379C19.379.39 18.226.131 16.948.072 15.668.013 15.263 0 12 0z"/>
+                  <path d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a4 4 0 110-8 4 4 0 010 8z"/>
+                  <circle cx="18.406" cy="5.595" r="1.439"/>
+                </svg>
+              </a>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom -->
+        <div class="text-center text-gray-500 text-sm mt-10">
+          © <%= Time.now.year %> Todos os direitos reservados.
+        </div>
+      </footer>
+
+    </main>
+
+    <% if flash[:success] %>
+      <div id="alert"class="absolute right-12 top-12 z-50 bg-green-100 border border-green-400 text-green-700 pl-3 pr-12 py-3 rounded mb-4 max-w-10xl mx-auto mt-4" role="alert">
+        <strong class="font-bold">Sucesso!</strong>
+        <span class="block sm:inline"><%= flash[:success] %></span>
+        <span id="close" class="absolute top-0 bottom-0 right-0 px-4 py-3">
+          <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <title>Close</title>
+            <path d="M14.348 14.849a1.2 1.2 0 01-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 11-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 111.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 111.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 010 1.698z"/>
+          </svg>
+        </span>
+      </div>
+      <% flash.delete(:success) %>
+    <% end %>
+    <% if flash[:danger] %>
+      <div id="alert" class="absolute right-12 top-12 z-50 bg-red-100 border border-red-400 text-red-700 pl-3 pr-12 py-3 rounded mb-4 max-w-10xl mx-auto mt-4" role="alert">
+        <strong class="font-bold">Erro!</strong>
+        <span class="block sm:inline"><%= flash[:danger] %></span>
+        <span id="close" class="absolute top-0 bottom-0 right-0 px-4 py-3">
+          <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <title>Close</title>
+            <path d="M14.348 14.849a1.2 1.2 0 01-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 11-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 111.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 111.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 010 1.698z"/>
+          </svg>
+        </span>
+      </div>
+      <% flash.delete(:danger)  %>
+    <% end %>
+  </body>
+</html>

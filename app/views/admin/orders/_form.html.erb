@@ -1,0 +1,85 @@
+<div class="mt-28 max-w-xl mx-auto bg-white shadow-lg rounded-lg p-8">
+  <a href="<%= admin_orders_path %>" class="text-blue-500 hover:underline">Voltar</a>
+  <h1 class="mt-5 text-2xl font-bold mb-6 text-gray-800">Encomenda</h1>
+
+
+
+  <%= form_for [:admin, @order], html: { multipart: true, class: "space-y-6"} do |f| %>
+    
+    <!-- Nome -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-1">Nome do cliente</label>
+      <input type="text" name="order[client_name]" value="<%= @order.client_name %>"
+        class="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300"
+         placeholder="Ex: Andleia Fleila">
+    </div>
+
+    <!-- Nome -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-1">Email do cliente</label>
+      <input type="text" name="order[client_email]" value="<%= @order.client_email %>"
+        class="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300" 
+        placeholder="Ex: Andleia Fleila">
+    </div>
+
+    <!-- Nome -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-1">Telefone do cliente</label>
+      <input type="text" name="order[client_phone]" value="<%= @order.client_phone %>"
+        class="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300" 
+        placeholder="Ex: Andleia Fleila">
+    </div>
+
+    <!-- Nome -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-1">Morada do cliente</label>
+      <input type="text" name="order[client_address]" value="<%= @order.client_address %>"
+        class="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300" 
+        placeholder="Ex: Andleia Fleila">
+    </div>
+
+    <h2 class="text-xl font-semibold mt-4">Produtos</h2>
+
+    <div id="items_container" class="space-y-4">
+
+      <% @order.order_items.each do |item| %>
+        <%= render "order_item_fields", item: item, products: @all_products, colors: @colors, fragances: @fragances %>
+      <% end %>
+    </div>
+
+    <div class="hidden" id="item_template">
+      <%= render "order_item_fields", item: OrderItem.new, products: @all_products, colors: @colors, fragances: @fragances %>
+    </div>
+
+    <!-- Botão para adicionar produto -->
+    <button type="button" id="add_item"
+      class="mt-4 bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-700">
+      + Adicionar Produto
+    </button>
+
+    <!-- Preço -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-1">Preço</label>
+      <input type="number" name="order[price]" step="0.01" value="<%= @order.price %>"
+        class="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300"
+        placeholder="Ex: 49.90">
+    </div>
+
+    <!-- Preço -->
+    <div>
+      <label class="block text-gray-700 font-medium mb-1">Portes</label>
+      <input type="number" name="order[ports]" step="0.01" value="<%= @order.ports %>"
+        class="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300"
+        placeholder="Ex: 49.90">
+    </div>
+
+
+    <!-- Botão -->
+    <button type="submit"
+      class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition">
+      Guardar
+    </button>
+
+  <% end %>
+  
+</div>

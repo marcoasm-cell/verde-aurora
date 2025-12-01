@@ -1,0 +1,3 @@
+class Fragance < ApplicationRecord
+  
+end
