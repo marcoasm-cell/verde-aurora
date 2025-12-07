@@ -20,4 +20,9 @@ development:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  variables:
+    sql_mode: 'traditional'
+  username: root
+  password: root
+  database: verde_aurora_production
+
