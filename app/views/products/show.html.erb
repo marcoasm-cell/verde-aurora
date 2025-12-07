@@ -22,7 +22,7 @@
       <div id="carousel-1" class="carousel flex transition-transform duration-500">
         <% @product.images.each do |img| %>
           <img src="<%= url_for(img) %>"
-              class="w-full h-68 object-cover flex-shrink-0"
+              class="w-full h-78 object-cover flex-shrink-0"
               alt="<%= @product.name %>">
         <% end %>
       </div>
