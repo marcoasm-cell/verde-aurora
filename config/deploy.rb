@@ -1,4 +1,4 @@
-lock "~> 3.18.0"
+lock "~> 3.19.2"
 
 set :application, "verde-aurora"
 set :repo_url, "https://marcomarques:coffee_please@gitlab.projectbox.pt/dg/gamification/gamification-backend.git"

@@ -11,7 +11,7 @@ gem 'rails', '8.1.1'
 gem 'mysql2', '~> 0.5'
 
 # Use Puma as the app server
-gem 'puma', '~> 5.0'
+gem 'puma'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -45,10 +45,12 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem "capistrano", "~> 3.18"
-  gem "capistrano-rails"
-  gem "capistrano-rbenv"
-  gem "capistrano3-puma"
+  gem 'capistrano', '~> 3.14', require: false
+  gem 'capistrano3-delayed-job', '~> 1.7', require: false
+  gem 'capistrano3-puma', '~> 5.0', require: false
+  gem 'capistrano-rails', '~> 1.6', require: false
+  gem 'capistrano-rbenv', '~> 2.2', require: false
+
 end
 
 group :test do
@@ -71,3 +73,6 @@ gem "tailwindcss-rails", "~> 4.4"
 gem "importmap-rails"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1.7"
+
+# Database based asynchronous priority queue system
+gem 'daemons', '~> 1.3'
