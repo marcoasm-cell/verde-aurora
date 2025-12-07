@@ -1,7 +1,7 @@
 lock "~> 3.19.2"
 
 set :application, "verde-aurora"
-set :repo_url, "https://marcomarques:coffee_please@gitlab.projectbox.pt/dg/gamification/gamification-backend.git"
+set :repo_url, "https://m_marques:coffee_please@gitlab.com/m_marques/verde-aurora.git"
 set :deploy_to, "/var/www/#{fetch(:application)}/#{fetch(:stage)}"
 
 append :linked_files, "config/master.key"
