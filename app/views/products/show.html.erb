@@ -45,8 +45,8 @@
 
       <p class="text-gray-700"><%= simple_format @product.description %></p>
 
-      <div class="mt-4 flex flex-col gap-1">
-        <p class="text-xs text-gray-400">Cores</p> 
+      <p class="text-xs text-gray-400">Cores</p> 
+      <div class="mt-4 flex flex-row gap-1">
         <% @colors.each do |color| %>
           <div class="group w-6 h-6 flex justify-center hover:scale-110 transition rounded-full relative" title="<%= color.name %>" style="background-color: <%= color.code %>">
             <span class="hidden group-hover:flex absolute -bottom-4 text-xs text-gray-400"><%= color.name %></span>
@@ -59,9 +59,7 @@
         <% @fragances.each do |fragance| %>
           <div class="group h-6 flex px-2 justify-center hover:scale-110 transition relative rounded-md" title="<%= fragance.name %>" 
             style="background-color: <%= fragance.code %>">
-            <span class="text-gray-800 font-light">
-              <%= fragance.name %>
-            </span>
+            <span class="text-gray-800 font-light text-white" style="white-space: pre;"><%= fragance.name %></span>
           </div>
         <% end %>
       </div>
