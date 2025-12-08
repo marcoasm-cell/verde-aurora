@@ -55,9 +55,9 @@
       </div>
 
       <p class="text-xs text-gray-400">Fragrâncias</p> 
-      <div class="mt-5 flex flex-row gap-1">
+      <div class="mt-5 flex flex-row gap-4 gap-y-1 grid grid-cols-2">
         <% @fragances.each do |fragance| %>
-          <div class="group h-6 flex px-2 justify-center hover:scale-110 transition relative rounded-md" title="<%= fragance.name %>" 
+          <div class="group h-8 flex px-3 py-1 justify-center hover:scale-110 transition relative rounded-md" title="<%= fragance.name %>" 
             style="background-color: <%= fragance.code %>">
             <span class="text-gray-800 font-light text-white" style="white-space: pre;"><%= fragance.name %></span>
           </div>
