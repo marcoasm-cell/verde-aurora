@@ -20,7 +20,26 @@
 
 </div>
 
-<div class="max-w-7xl p-4 mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto" id="products">
+<section class="relative py-12 mt-6">
+  <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url(<%= image_path('3.jpg') %>)"></div>
+
+  <div class="relative max-w-4xl mx-auto text-center px-6">
+    <div class="w-24 mx-auto mb-4 border-t-4 border-amber-600"></div>
+
+    <h2 class="text-3xl md:text-4xl font-serif text-gray-800 tracking-wide">
+      Feito à mão com alma e intenção.
+    </h2>
+
+    <p class="mt-3 text-lg text-gray-600 font-light">
+      Criações únicas feitas com paixão, tradição e coração.
+    </p>
+
+    <div class="w-24 mx-auto mt-4 border-b-4 border-amber-600"></div>
+  </div>
+</section>
+
+
+<div class="max-w-7xl p-4 mt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto" id="products">
 
   <!-- Loop through products -->
   <% @products.each_with_index do |product, idx| %>

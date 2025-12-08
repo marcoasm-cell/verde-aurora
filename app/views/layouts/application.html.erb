@@ -2,6 +2,7 @@
 <html lang="pt-pt">
   <head>
     <title>VerdeAurora</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -9,6 +10,11 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_importmap_tags %>
 
+    <style>
+      body {
+        font-family: 'Lora', "Inter", "sans-serif";
+      }
+    </style>
     <link rel="apple-touch-icon" sizes="180x180" href="<%= image_path('apple-touch-icon.png') %>" type="image/png" >
     <link rel="icon" type="image/png" sizes="32x32" href="<%= image_path('favicon-32x32.png') %>">
     <link rel="icon" type="image/png" sizes="16x16" href="<%= image_path('favicon-16x16.png') %>">
@@ -30,40 +36,35 @@
             </div>
 
             <!-- Links da Navbar -->
-            <div class="hidden md:flex space-x-4 items-center">
-              <a href="#" class="hover:bg-white hover:opacity-50 hover:text-black text-white px-3 py-2 rounded">Home</a>
+            <div class="flex space-x-4 items-center">
+              <a href="#" class="hidden md:flex hover:bg-white hover:opacity-50 hover:text-black text-white px-1 md:px-3 py-2 rounded">Home</a>
               <%
 =begin%>
  <a href="#" class="hover:bg-white hover:opacity-50 hover:text-black text-white px-3 py-2 rounded">Sobre</a> 
 <%
 =end%>
-              <a href="#products" class="hover:bg-white hover:opacity-50 hover:text-black text-white px-3 py-2 rounded">Produtos</a>
-              <a href="#contacts" class="hover:bg-white hover:opacity-50 hover:text-black text-white px-3 py-2 rounded">Contactos</a>
+              <a href="/#products" class="hover:bg-white hover:opacity-50 hover:text-black text-white px-1 md:px-3 py-2 rounded">Produtos</a>
+              <a href="#contacts" class="hover:bg-white hover:opacity-50 hover:text-black text-white px-1 md:px-3 py-2 rounded">Contactos</a>
             </div>
 
-            <!-- Botão Mobile -->
+            <!-- Botão Mobile
             <div class="flex items-center md:hidden z-10">
-              <button id="menu-btn" class="focus:outline-none">
-                <svg class="h-6 w-6" fill="none" stroke="#fff" stroke-width="2"
+              <button id="menu-btn" class="focus:outline-none text-white">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2"
                     viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
               </button>
-            </div>
+            </div> -->
 
           </div>
         </div>
 
-        <!-- Menu Mobile (hidden por padrão) -->
-        <div id="mobile-menu" class="md:hidden hidden absolute top-0 right-0 w-full px-2 pt-2 pb-3 space-y-1 h-screen pt-12"  style="background-color: #d7e4da">
-          <a href="#products" class="block hover:bg-green-700 px-3 py-2 rounded">Produtos</a>
-          <%
-=begin%>
- <a href="#" class="block hover:bg-green-700 px-3 py-2 rounded">Sobre</a> 
-<%
-=end%>
-          <a href="#contacts" class="block hover:bg-green-700 px-3 py-2 rounded">Contactos</a>
-        </div>
+        <!-- Menu Mobile (hidden por padrão)
+        <div id="mobile-menu" class="text-white md:hidden hidden fixed top-0 right-0 w-full px-2 pt-2 pb-3 space-y-1 h-screen pt-12"  style="background-color: #d7e4da">
+          <a href="#products" class="block hover:bg-green-700 mt-2 px-3 py-2 rounded text-2xl text-center font-bold uppercase">Produtos</a>
+          <a href="#contacts" class="block hover:bg-green-700 mt-2 px-3 py-2 rounded text-2xl text-center font-bold uppercase">Contactos</a>
+        </div> -->
       </nav>
 
       <%= yield %>

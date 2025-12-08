@@ -6,7 +6,7 @@ module.exports = {
         brand: "#3b82f6",
       },
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        sans: ["Playfair Display", "Inter", "sans-serif"],
       }
     }
   }

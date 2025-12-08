@@ -1,10 +1,5 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
-const btn = document.getElementById('menu-btn');
-const menu = document.getElementById('mobile-menu');
 
-btn.addEventListener('click', () => {
-  menu.classList.toggle('hidden');
-});
 
 document.getElementById("images_input")?.addEventListener("change", function (event) {
   const container = document.getElementById("preview_container");
