@@ -5,7 +5,13 @@
 
 
   <%= form_for [:admin, @order], html: { multipart: true, class: "space-y-6"} do |f| %>
-    
+    <div class="space-y-2">
+      <span>Completo</span>
+      <label class="flex items-center gap-2">
+        <input type="checkbox" <%= 'checked' if @order.status %> class="checkbox" name="order[status]"  />
+      </label>
+    </div>
+            
     <!-- Nome -->
     <div>
       <label class="block text-gray-700 font-medium mb-1">Nome do cliente</label>

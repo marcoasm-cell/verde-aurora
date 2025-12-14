@@ -46,7 +46,7 @@ class Admin::OrdersController < Admin::ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:client_name, :client_email, :client_phone, :client_address, :price, :ports, 
+    params.require(:order).permit(:status, :client_name, :client_email, :client_phone, :client_address, :price, :ports, 
       order_items_attributes: [:id, :product_id, :color_id, :fragance_id, :quantity, :_destroy])
   end
 end
