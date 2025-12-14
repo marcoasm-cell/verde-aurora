@@ -19,6 +19,7 @@ class AddInitialTables < ActiveRecord::Migration[8.1]
     end
 
     create_table :products do |t|
+      t.boolean :status, default: false
       t.string :name, null: false
       t.text :description
       t.integer :price, null: false
