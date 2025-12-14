@@ -14,7 +14,7 @@ class Admin::ProductsController < Admin::ApplicationController
   end
 
   def create
-    params[:product][:status] = false if !params[:status].present?
+    params[:product][:status] = false if !params[:product][:status].present?
     @product = Product.new(product_params)
     if @product.save
       flash[:success] = "Produto criado com sucesso"
@@ -27,7 +27,7 @@ class Admin::ProductsController < Admin::ApplicationController
 
   def update
     @product = Product.find(params[:id])
-    params[:product][:status] = false if !params[:status].present?
+    params[:product][:status] = false if !params[:product][:status].present?
     if @product.update(product_params)
       flash[:success] = "Produto atualizado com sucesso"
       redirect_to admin_products_path

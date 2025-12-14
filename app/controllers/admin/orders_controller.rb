@@ -14,6 +14,7 @@ class Admin::OrdersController < Admin::ApplicationController
   end
 
   def create
+    params[:order][:status] = false if !params[:order][:status].present?
     @order = Order.new(order_params)
 
     if @order.save
@@ -35,7 +36,7 @@ class Admin::OrdersController < Admin::ApplicationController
 
   def update
     @order = Order.find(params[:id])
-    params[:order][:status] = false if !params[:status].present?
+    params[:order][:status] = false if !params[:order][:status].present?
     if @order.update(order_params)
       flash[:success] = "Encomenda atualizada com sucesso"
       redirect_to admin_orders_path
