@@ -98,6 +98,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_25_134014) do
     t.text "description"
     t.string "name", null: false
     t.integer "price", null: false
+    t.boolean "status", default: false
     t.datetime "updated_at", null: false
     t.integer "views_count", default: 0, null: false
     t.index ["category_id"], name: "index_products_on_category_id"

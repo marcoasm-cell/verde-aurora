@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create_with(name: 'Marco', password: '123456', admin: true).find_or_create_by(email: 'marco.a.s.m@hotmail.com')
+User.create_with(name: 'Marco', status: true, password: '123456', admin: true).find_or_create_by(email: 'marco.a.s.m@hotmail.com')
 
 Category.create_with(name: 'Velas').find_or_create_by(name: 'Velas')
 Category.create_with(name: 'Jesmonite').find_or_create_by(name: 'Jesmonite')

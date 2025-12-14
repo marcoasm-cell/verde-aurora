@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
   def index 
-    @products = Product.all.order(id: :desc)
+    @products = Product.where(status: true).order(id: :desc)
   end
 end

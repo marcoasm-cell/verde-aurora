@@ -14,6 +14,7 @@ class Admin::ProductsController < Admin::ApplicationController
   end
 
   def create
+    params[:product][:status] = false if !params[:status].present?
     @product = Product.new(product_params)
     if @product.save
       flash[:success] = "Produto criado com sucesso"
@@ -26,6 +27,7 @@ class Admin::ProductsController < Admin::ApplicationController
 
   def update
     @product = Product.find(params[:id])
+    params[:product][:status] = false if !params[:status].present?
     if @product.update(product_params)
       flash[:success] = "Produto atualizado com sucesso"
       redirect_to admin_products_path
@@ -36,6 +38,6 @@ class Admin::ProductsController < Admin::ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :description, :price, :category_id,  images: [] )
+    params.require(:product).permit(:status, :name, :description, :price, :category_id,  images: [] )
   end
 end

@@ -6,6 +6,12 @@
 
   <%= form_for [:admin, @product], html: { multipart: true, class: "space-y-6"} do |f| %>
     
+    <div class="space-y-2">
+      <span>Visivel</span>
+      <label class="flex items-center gap-2">
+        <input type="checkbox" <%= 'checked' if @product.status %> class="checkbox" name="product[status]"  />
+      </label>
+    </div>
     <!-- Nome -->
     <div>
       <label class="block text-gray-700 font-medium mb-1">Nome do Produto</label>
