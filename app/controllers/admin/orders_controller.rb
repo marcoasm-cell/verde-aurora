@@ -1,6 +1,6 @@
 class Admin::OrdersController < Admin::ApplicationController
   def index
-    @orders = Order.all.order(created_at: :desc)
+    @orders = Order.all.order(:status)
   end
 
   def new
