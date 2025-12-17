@@ -20,6 +20,7 @@
 
 </div>
 
+
 <section class="relative py-12 mt-6">
   <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url(<%= image_path('3.jpg') %>)"></div>
 
@@ -42,39 +43,47 @@
 <div class="max-w-7xl p-4 mt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto" id="products">
 
   <!-- Loop through products -->
-  <% @products.each_with_index do |product, idx| %>
-    <div class="bg-white overflow-hidde hover:scale-105 transition">
+  <% @products.where(highlight: true).each_with_index do |product, idx| %>
+    <%= render partial: "application/partials/card", locals: { product: product, idx: idx } %>
+  <% end %>
 
-      <!-- IMAGE CAROUSEL -->
-      <a href="<%= product_path(product) %>">
-        <div class="relative rounded-lg overflow-hidden">
-          <div id="carousel-<%= idx %>" class="carousel flex transition-transform duration-500">
-            <% product.images.each do |img| %>
-              <img src="<%= url_for(img) %>"
-                  class="w-full h-68 object-cover flex-shrink-0 "
-                  alt="<%= product.name %>">
-            <% end %>
-          </div>
+</div>
 
-          <button data-target="carousel-<%= idx %>"
-                  class="carousel-prev hidden absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-1 rounded-full">
-            ‹
-          </button>
 
-          <button data-target="carousel-<%= idx %>"
-                  class="carousel-next hidden absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-1 rounded-full">
-            ›
-          </button>
-        </div>
-
-        <div class="p-4">
-          <h2 class="text-xl font-bold text-gray-800"><%= product.name %></h2>
-          <p class="text-gray-600 text-sm mt-1"><%= product.description.truncate_words(5) %></p>
-
-        </div>
-
-      </a>
+<!-- Categories Banner -->
+<section class="py-8 mt-6">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-6">
+      <h2 class="text-2xl md:text-3xl font-serif text-gray-800 tracking-wide mb-2">
+        Descubra
+      </h2>
+      <div class="w-24 mx-auto border-t-2 border-amber-600"></div>
     </div>
+    
+    <div class="flex flex-wrap justify-center gap-4 md:gap-6">
+      <% @categories.each do |category| %>
+        <a href="<%= category_path(category) %>" 
+           class="group relative overflow-hidden bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 min-w-[140px] md:min-w-[180px]">
+          <div class="p-6 md:p-8 text-center">
+            <div class="mb-3">
+                <img src="<%= url_for(category.products.first.images.first ) %>" class="w-16 h-16  mx-auto object-cover rounded-full">
+            </div>
+            <h3 class="text-base md:text-lg font-semibold text-gray-800 group-hover:text-amber-700 transition-colors duration-300">
+              <%= category.name %>
+            </h3>
+          </div>
+        </a>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+
+<div class="max-w-7xl p-4 mt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto" id="products">
+
+  <!-- Loop through products -->
+  <% @products.where(highlight: false).each_with_index do |product, idx| %>
+    <%= render partial: "application/partials/card", locals: { product: product, idx: idx } %>
   <% end %>
 
 </div>

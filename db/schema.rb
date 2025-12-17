@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_25_134014) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_17_212330) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -41,6 +41,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_25_134014) do
 
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
+    t.boolean "status", default: true, null: false
   end
 
   create_table "colors", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -92,16 +93,22 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_25_134014) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "product_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "category_id", null: false
+    t.bigint "product_id", null: false
+    t.index ["category_id"], name: "index_product_categories_on_category_id"
+    t.index ["product_id"], name: "index_product_categories_on_product_id"
+  end
+
+  create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.text "description"
+    t.boolean "highlight", default: false, null: false
     t.string "name", null: false
     t.integer "price", null: false
     t.boolean "status", default: false
     t.datetime "updated_at", null: false
     t.integer "views_count", default: 0, null: false
-    t.index ["category_id"], name: "index_products_on_category_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -126,5 +133,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_25_134014) do
   add_foreign_key "order_items", "fragances"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
-  add_foreign_key "products", "categories"
+  add_foreign_key "product_categories", "categories"
+  add_foreign_key "product_categories", "products"
 end

@@ -47,3 +47,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 document.getElementById("close")?.addEventListener("click", function () {
     document.getElementById("alert").remove();
 });
+
+// Toggle mobile menu
+document.getElementById("menu-btn")?.addEventListener("click", function () {
+    const mobileMenu = document.getElementById("mobile-menu");
+    if (mobileMenu) {
+        mobileMenu.classList.toggle("hidden");
+    }
+});

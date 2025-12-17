@@ -28,6 +28,8 @@ class Admin::ProductsController < Admin::ApplicationController
   def update
     @product = Product.find(params[:id])
     params[:product][:status] = false if !params[:product][:status].present?
+
+    @product.categories.clear
     if @product.update(product_params)
       flash[:success] = "Produto atualizado com sucesso"
       redirect_to admin_products_path
@@ -38,6 +40,6 @@ class Admin::ProductsController < Admin::ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:status, :name, :description, :price, :category_id,  images: [] )
+    params.require(:product).permit(:status, :name, :description, :price, product_categories_attributes: [:category_id],  images: [] )
   end
 end

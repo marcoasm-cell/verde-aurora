@@ -44,12 +44,11 @@
     <!-- Categoria -->
     <div>
       <label class="block text-gray-700 font-medium mb-1">Categoria</label>
-
-      <select name="product[category_id]" class="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300"
+      <select name="product[product_categories_attributes][][category_id]" multiple class="w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300"
         placeholder="Ex: Roupas">
           <option value=""></option>
         <% @categories.each do |category| %>
-          <option value="<%= category.id %>" <%= 'selected' if @product.category_id == category.id %>
+          <option value="<%= category.id %>" <%= 'selected' if @product.categories.include?(category) %>
             ><%= category.name %></option>
         <% end %>
       </select>
