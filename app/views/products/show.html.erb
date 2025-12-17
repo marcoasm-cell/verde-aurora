@@ -41,7 +41,9 @@
     <!-- PRODUCT INFO -->
     <div class="space-y-4">
       <h1 class="text-3xl font-bold text-gray-800"><%= @product.name %></h1>
-      <p class="text-gray-500 text-sm"><%= @product.category.name %></p>
+      <p class="text-gray-500 text-sm"><% @product.categories.each do |category| %>
+        <a href="<%= category_path(category) %>" class="hover:underline"><%= category.name %></a><% unless category == @product.categories.last %>, <% end %>
+      <% end %></p>
 
       <p class="text-gray-700"><%= simple_format @product.description %></p>
 
