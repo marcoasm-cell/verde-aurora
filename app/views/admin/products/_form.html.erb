@@ -9,7 +9,13 @@
     <div class="space-y-2">
       <span>Visivel</span>
       <label class="flex items-center gap-2">
-        <input type="checkbox" <%= 'checked' if @product.status %> class="checkbox" name="product[status]"  />
+        <input type="checkbox" <%= 'checked' if @product.status %> value="1" class="checkbox" name="product[status]"  />
+      </label>
+    </div>
+    <div class="space-y-2">
+      <span>Destaque</span>
+      <label class="flex items-center gap-2">
+        <input type="checkbox" <%= 'checked' if @product.highlight %> value="1" class="checkbox" name="product[highlight]"  />
       </label>
     </div>
     <!-- Nome -->
