@@ -18,11 +18,11 @@
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
     
     <!-- IMAGE CAROUSEL -->
-    <div class="relative rounded-lg overflow-hidden">
+    <div class="relative overflow-hidden">
       <div id="carousel-1" class="carousel flex transition-transform duration-500">
         <% @product.images.each do |img| %>
           <img src="<%= url_for(img) %>"
-              class="w-full h-78 object-cover flex-shrink-0"
+              class="w-full h-88 object-cover flex-shrink-0 rounded-lg"
               alt="<%= @product.name %>">
         <% end %>
       </div>
@@ -57,7 +57,7 @@
       </div>
 
       <p class="text-xs text-gray-400">Fragrâncias</p> 
-      <div class="mt-5 flex flex-row gap-4 gap-y-1 grid grid-cols-2">
+      <div class="mt-5 flex flex-wrap gap-4 gap-y-1 ">
         <% @fragances.each do |fragance| %>
           <div class="group h-8 flex px-3 py-1 justify-center hover:scale-110 transition relative rounded-md" title="<%= fragance.name %>" 
             style="background-color: <%= fragance.code %>">
