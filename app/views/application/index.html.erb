@@ -1,23 +1,40 @@
-<div class="relative w-full max-h-screen mx-auto overflow-hidden">
+<div class="hidden md:flex relative w-full max-h-screen mx-auto overflow-hidden">
   <!-- Slides -->
-  <div id="carousel-00"  class="carousel flex transition-transform duration-500">
-    <img src="<%= image_path('home1.png') %>" class="w-full flex-shrink-0" />
-    <img src="<%= image_path('home2.png') %>" class="w-full flex-shrink-0" />
-    <img src="<%= image_path('home3.png') %>" class="w-full flex-shrink-0" />
-    <img src="<%= image_path('home4.png') %>" class="w-full flex-shrink-0" />
-    <img src="<%= image_path('home5.png') %>" class="w-full flex-shrink-0" />
+  <div id="carousel-001" class="carousel flex transition-transform duration-500">
+    <img src="<%= image_path('hero1.png') %>" class="object-cover w-full flex-shrink-0" />
+    <img src="<%= image_path('hero2.png') %>" class="object-cover w-full flex-shrink-0" />
   </div>
 
-  <button id="carousel-00" 
+  <button id="carousel-001" 
           class="carousel-prev hidden absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-1 rounded-full">
     ‹
   </button>
 
-  <button id="carousel-00"
+  <button id="carousel-001"
           class="carousel-next hidden absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-1 rounded-full">
     ›
   </button>
 
+</div>
+
+<div class="md:hidden relative w-full max-h-screen mx-auto overflow-hidden rounded-b-3xl">
+  <!-- Slides -->
+  <div id="carousel-002" class="carousel flex transition-transform duration-500">
+    <img src="<%= image_path('hero_mobile1.png') %>" class="w-full flex-shrink-0" />
+    <img src="<%= image_path('hero_mobile2.png') %>" class="w-full flex-shrink-0" />
+  </div>
+
+
+
+  <button id="carousel-002" 
+          class="carousel-prev hidden absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-1 rounded-full">
+    ‹
+  </button>
+
+  <button id="carousel-002"
+          class="carousel-next hidden absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-1 rounded-full">
+    ›
+  </button>
 </div>
 
 
@@ -63,7 +80,7 @@
     <div class="flex flex-wrap justify-center gap-4 md:gap-6">
       <% @categories.each do |category| %>
         <a href="<%= category_path(category) %>" 
-           class="group relative overflow-hidden bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 min-w-[140px] md:min-w-[180px]">
+           class="w-50 group relative overflow-hidden bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 min-w-[140px] md:min-w-[180px]">
           <div class="p-6 md:p-8 text-center">
             <div class="mb-3">
                 <img src="<%= url_for(category.products.first.images.first ) %>" class="w-16 h-16  mx-auto object-cover rounded-full">
