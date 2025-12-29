@@ -13,3 +13,30 @@
  *= require_tree .
  *= require_self
  */
+@import "https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css";
+
+/* Custom Splide arrow positioning */
+.splide__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.splide__arrow--prev {
+  left: 0.5rem;
+}
+
+.splide__arrow--next {
+  right: 0.5rem;
+}
+
+/* Hide arrows on card carousels by default, show on hover */
+.bg-white .splide__arrow {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.bg-white:hover .splide__arrow {
+  opacity: 1;
+}

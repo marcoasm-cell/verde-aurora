@@ -1,40 +1,48 @@
+
 <div class="hidden md:flex relative w-full max-h-screen mx-auto overflow-hidden">
-  <!-- Slides -->
-  <div id="carousel-001" class="carousel flex transition-transform duration-500">
-    <img src="<%= image_path('hero1.png') %>" class="object-cover w-full flex-shrink-0" />
-    <img src="<%= image_path('hero2.png') %>" class="object-cover w-full flex-shrink-0" />
+  <div class="splide w-full">
+    <div class="splide__track">
+      <ul class="splide__list">
+        <li class="splide__slide">
+          <img src="<%= image_path('hero1.png') %>" class="object-cover w-full" />
+        </li>
+        <li class="splide__slide">
+          <img src="<%= image_path('hero2.png') %>" class="object-cover w-full" />
+        </li>
+      </ul>
+    </div>
+    <div class="splide__arrows">
+      <button class="splide__arrow splide__arrow--prev bg-black/40 text-white px-3 py-1 rounded-full">
+        ‹
+      </button>
+      <button class="splide__arrow splide__arrow--next bg-black/40 text-white px-3 py-1 rounded-full">
+        ›
+      </button>
+    </div>
   </div>
-
-  <button id="carousel-001" 
-          class="carousel-prev hidden absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-1 rounded-full">
-    ‹
-  </button>
-
-  <button id="carousel-001"
-          class="carousel-next hidden absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-1 rounded-full">
-    ›
-  </button>
-
 </div>
 
 <div class="md:hidden relative w-full max-h-screen mx-auto overflow-hidden rounded-b-3xl pb-6">
-  <!-- Slides -->
-  <div id="carousel-002" class="carousel flex transition-transform duration-500">
-    <img src="<%= image_path('hero_mobile1.png') %>" class="w-full flex-shrink-0" />
-    <img src="<%= image_path('hero_mobile2.png') %>" class="w-full flex-shrink-0" />
+  <div class="splide w-full">
+    <div class="splide__track">
+      <ul class="splide__list">
+        <li class="splide__slide">
+          <img src="<%= image_path('hero_mobile1.png') %>" class="w-full rounded-b-2xl" />
+        </li>
+        <li class="splide__slide">
+          <img src="<%= image_path('hero_mobile2.png') %>" class="w-full rounded-b-2xl" />
+        </li>
+      </ul>
+    </div>
+    <div class="splide__arrows">
+      <button class="splide__arrow splide__arrow--prev bg-black/40 text-white px-3 py-1 rounded-full">
+        ‹
+      </button>
+      <button class="splide__arrow splide__arrow--next bg-black/40 text-white px-3 py-1 rounded-full">
+        ›
+      </button>
+    </div>
   </div>
-
-
-
-  <button id="carousel-002" 
-          class="carousel-prev hidden absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-1 rounded-full">
-    ‹
-  </button>
-
-  <button id="carousel-002"
-          class="carousel-next hidden absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-1 rounded-full">
-    ›
-  </button>
 </div>
 
 
@@ -105,76 +113,3 @@
 
 </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-
-    document.querySelectorAll(".carousel").forEach((carousel) => {
-      let index = 0;
-      const slides = carousel.children;
-      const total = slides.length;
-
-      const update = () =>
-        carousel.style.transform = `translateX(-${index * 100}%)`;
-
-      const prev = carousel.parentElement.querySelector(".carousel-prev");
-      const next = carousel.parentElement.querySelector(".carousel-next");
-
-      prev.addEventListener("click", () => {
-        index = (index - 1 + total) % total;
-        update();
-      });
-
-      next.addEventListener("click", () => {
-        index = (index + 1) % total;
-        update();
-      });
-
-      // --- SWIPE SUPPORT ---
-      let startX = 0;
-      let currentX = 0;
-      let isDragging = false;
-
-      const startDrag = (x) => {
-        isDragging = true;
-        startX = x;
-        carousel.style.transition = "none";
-      };
-
-      const moveDrag = (x) => {
-        if (!isDragging) return;
-        currentX = x;
-        const deltaX = currentX - startX;
-        carousel.style.transform =
-          `translateX(calc(${-index * 100}% + ${deltaX}px))`;
-      };
-
-      const endDrag = () => {
-        if (!isDragging) return;
-        isDragging = false;
-        const deltaX = currentX - startX;
-
-        // If swipe big enough → change slide
-        if (Math.abs(deltaX) > 50) {
-          if (deltaX < 0) index = (index + 1) % total; // swipe left → next
-          else index = (index - 1 + total) % total;    // swipe right → prev
-        }
-
-        // snap back
-        carousel.style.transition = "transform .4s ease";
-        update();
-      };
-
-      // Touch events
-      carousel.addEventListener("touchstart", (e) => startDrag(e.touches[0].clientX));
-      carousel.addEventListener("touchmove", (e) => moveDrag(e.touches[0].clientX));
-      carousel.addEventListener("touchend", endDrag);
-
-      // Mouse events (optional — swipe with mouse on desktop)
-      carousel.addEventListener("mousedown", (e) => startDrag(e.clientX));
-      carousel.addEventListener("mousemove", (e) => moveDrag(e.clientX));
-      carousel.addEventListener("mouseup", endDrag);
-      carousel.addEventListener("mouseleave", endDrag);
-    });
-
-  });
-</script>

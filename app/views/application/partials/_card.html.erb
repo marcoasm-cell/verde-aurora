@@ -3,23 +3,27 @@
     <!-- IMAGE CAROUSEL -->
     <a href="<%= product_path(product) %>">
     <div class="relative rounded-lg overflow-hidden">
-        <div id="carousel-<%= idx %>" class="carousel flex transition-transform duration-500">
-        <% product.images.each do |img| %>
-            <img src="<%= url_for(img) %>"
-                class="w-full h-68 object-cover flex-shrink-0 "
-                alt="<%= product.name %>">
-        <% end %>
+        <div class="splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <% product.images.each do |img| %>
+                        <li class="splide__slide">
+                            <img src="<%= url_for(img) %>"
+                                class="w-full h-68 object-cover"
+                                alt="<%= product.name %>">
+                        </li>
+                    <% end %>
+                </ul>
+            </div>
+            <div class="splide__arrows">
+                <button class="splide__arrow splide__arrow--prev bg-black/40 text-white px-3 py-1 rounded-full">
+                    ‹
+                </button>
+                <button class="splide__arrow splide__arrow--next bg-black/40 text-white px-3 py-1 rounded-full">
+                    ›
+                </button>
+            </div>
         </div>
-
-        <button data-target="carousel-<%= idx %>"
-                class="carousel-prev hidden absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-1 rounded-full">
-        ‹
-        </button>
-
-        <button data-target="carousel-<%= idx %>"
-                class="carousel-next hidden absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-1 rounded-full">
-        ›
-        </button>
     </div>
 
     <div class="p-4">
